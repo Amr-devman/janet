@@ -48,7 +48,9 @@ def check(project_dir):
 				code = open(file, "r")
 				lines = code.readlines()
 				for line in lines:
-					if ("import" in line) and (not line.startswith('#')):
+					if( ("import" in line) and
+						 (not line.startswith('#')) and 
+						 	(not line.endswith("import")) ):
 						module = line.split(" ")[1]
 						module = module.split(".")[0]
 						module = module.rstrip("\n")
@@ -61,19 +63,27 @@ def check(project_dir):
 
 	for module in modules:
 		if module in os.listdir(project_dir):
-			print(f"{module} is a local import")
+			#print(f"{module} is a local import")
+			continue
+		elif (module == " ") or (module == ""):
+			continue
 		else:
-			try:
-				_ = importlib.import_module(module)
-				print(f"imported {module} successfully!")
-			except Exception as e:
+			found = importlib.find_loader(module)
+			if not found:
 				uninstalled_modules.append(module)
-				print(f"could not find {module}")
 
 	
 
 	if len(uninstalled_modules):
+		print('You have the following uninstalled module(s)')
+		for idx, mod in enumerate(uninstalled_modules):
+			print(f"	{idx}: {mod}")
+		print("I'll take care of it!")
+		print()
+ 
 		install(uninstalled_modules)
-
+		
+		print()
+		print("Installation completed")
 
 
