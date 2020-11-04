@@ -132,3 +132,16 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+#janet records
+.janetrecord.json
+#janet records
+.janetrecord.json
+#janet records
+.janetrecord.json
+#janet records
+.janetrecord.json
+#janet records
+.janetrecord.json
+#janet records
+.janetrecord.json

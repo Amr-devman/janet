@@ -4,7 +4,6 @@ import subprocess
 import sys
 import time
 
-from api.db_functions import it_exists, store_last_modified, get_last_modified_time, get_last_modified
 
 def list_files(startpath):
 	file_list = []
@@ -37,20 +36,20 @@ def check_module_in_pip(module):
 
 
 
-def check(project_dir):
+def check(project_dir, janetrecord):
 	files = list_files(project_dir)
 	modules = []
 
 	for file in files:
-		exists = it_exists(file)
+		exists = janetrecord.it_exists(file)
 
 		if not exists:
-			store_last_modified(file)
+			janetrecord.store_last_modified(file)
 		else:
-			last_modified = get_last_modified_time(file)
+			last_modified = janetrecord.get_last_modified_time(file)
 
-			if last_modified > get_last_modified(file):
-				store_last_modified(file)
+			if last_modified > janetrecord.get_last_modified_from_records(file):
+				janetrecord.store_last_modified(file)
 
 				code = open(file, "r")
 				lines = code.readlines()
@@ -99,6 +98,5 @@ def check(project_dir):
 		print()
 		print("Installation completed")
 		print("press enter to show cli..")
-
 
 
