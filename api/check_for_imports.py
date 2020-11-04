@@ -25,10 +25,17 @@ def list_files(startpath):
 
 	return file_list
 
-def install(packages):
+def install(modules):
 	cmd = [sys.executable, "-m", "pip", "install"]
-	cmd.extend(packages)
+	cmd.extend(modules)
 	subprocess.check_call(cmd)
+
+def check_module_in_pip(module):
+	cmd = [sys.executable, '-m', 'pip', 'search', module]
+	result = subprocess.run(cmd, capture_output=True)
+	return len(result.stdout) > 0
+
+
 
 def check(project_dir):
 	files = list_files(project_dir)
@@ -62,15 +69,22 @@ def check(project_dir):
 	
 
 	for module in modules:
-		if module in os.listdir(project_dir):
-			#print(f"{module} is a local import")
+		
+		if (module == " ") or (module == ""):
 			continue
-		elif (module == " ") or (module == ""):
-			continue
-		else:
-			found = importlib.find_loader(module)
-			if not found:
+		elif module in os.listdir(project_dir):
+				continue
+
+
+		found = importlib.find_loader(module)
+		if not found:
+			is_in_pip = check_module_in_pip(module)
+			if not is_in_pip:
+				print(f"{module} is neither a local import nor a pip package, skipping ...")
+				continue
+			else:
 				uninstalled_modules.append(module)
+			
 
 	
 
@@ -81,9 +95,10 @@ def check(project_dir):
 		print("I'll take care of it!")
 		print()
  
-		install(uninstalled_modules)
-		
+		install(uninstalled_modules)	
 		print()
 		print("Installation completed")
+		print("press enter to show cli..")
+
 
 

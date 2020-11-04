@@ -1,0 +1,34 @@
+from api.check_for_imports import list_files
+import subprocess
+import psutil
+import sys
+import os
+
+
+def call_run_subprocess(file, args=None):
+	cmd = [sys.executable, file]
+	if args is not None:
+		cmd.extend(args)
+	p = subprocess.Popen(cmd)
+
+	return p
+
+
+
+def run_code(project_dir, entry_point, debug=False):
+	files = list_files(project_dir)
+	entry_point_file = ''
+	entry_point = f"{entry_point}.py"
+	for file in files:
+		if entry_point in file:
+			entry_point_file += file
+			break
+	if len(entry_point_file) == 0:
+		print("Invalid entry point")
+		return None
+
+	process = call_run_subprocess(entry_point_file)
+
+	return process
+
+
