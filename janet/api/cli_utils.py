@@ -1,5 +1,5 @@
-from api.run import run_code
-from api.check_for_imports import install
+from .run import run_code
+from .check_for_imports import install
 
 from colorama import Fore
 import argparse

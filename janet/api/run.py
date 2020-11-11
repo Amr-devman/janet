@@ -1,4 +1,4 @@
-from api.check_for_imports import list_files
+from .check_for_imports import list_files
 import subprocess
 import psutil
 import sys

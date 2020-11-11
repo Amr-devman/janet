@@ -1,7 +1,7 @@
-from api.check_for_imports import check
-from api.cli_utils import print_header, command
+from .api.check_for_imports import check
+from .api.cli_utils import print_header, command
 
-from api.janet_record import JanetRecord
+from .api.janet_record import JanetRecord
 
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.events import EVENT_JOB_ERROR, EVENT_JOB_EXECUTED
