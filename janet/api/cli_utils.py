@@ -19,9 +19,9 @@ def print_header():
 
 def print_cmd():
     print(Fore.WHITE + 'Cool stuff you could do:')
-    print(Fore.GREEN+ '	1. run (to run the selected entry point (running again will kill the current python process)')
+    print(Fore.GREEN+ '	1. run (to run the selected entry point, running again will kill the current python process)')
     print(Fore.GREEN+ '	1. install <PACKAGE_1> <PACKAGE_2> ... (install packages manually)')
-    print(Fore.GREEN+ '	2. change-entrypoint (change the entry point')
+    print(Fore.GREEN+ '	2. change-entrypoint (change the script that janet will run)')
     print(Fore.GREEN+ '	3. kill (to manually end a run)')
     print(Fore.GREEN+ '	4. exit (to stop janet)')
     print(Fore.GREEN+ '	5. menu')
