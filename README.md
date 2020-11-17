@@ -16,7 +16,7 @@ once installed, cd to your project directory and run the following:
 ```bash
 python -m janet -p <PROJECT_PATH, default="current directory"> -s <SCRIPT>
 ```
-the -s flag specifies which script to run when the ```bash run ``` command is issued,
+the -s flag specifies which script to run when the ```run``` command is issued,
 this is useful if your project is a webserver. You can change the script that is run, this is discussed below in the "commands" section.
 
 you will then be greeted with a menu of commands, that's it!
