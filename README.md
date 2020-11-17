@@ -5,7 +5,7 @@ to focus more on scripting and less on piping packages and managing a project. j
 pip packages when a .py file is saved and will generate a requirements.txt file
 automatically, it will also monitor all your scripts for new packages and install them in the background. 
 
-To get start with janet, you need to install the package:
+To get started with janet, you need to install the package:
 
 ```bash
 pip install janet
@@ -38,12 +38,12 @@ we recommand that you create your projects in a virtualenv and install janet on 
 
 ## What can janet do?
 janet has the following commands
-	1. 'run' to run the script you defined using the ```-s``` flag
-	2. 'install <PACKAGE_1> <PACKAGE_2>' to manually install packages (yuck)
-	3. 'change-entrypoint' to change the script 'run' will run
-	4. 'kill' to kill run if things go run
-	5. 'menu' to see all the commands you can run
-	6. 'exit' to stop janet (she will still love you though)
+	- 'run' to run the script you defined using the ```-s``` flag
+	- 'install <PACKAGE_1> <PACKAGE_2>' to manually install packages (yuck)
+	- 'change-entrypoint' to change the script 'run' will run
+	- 'kill' to kill run if things go run
+	- 'menu' to see all the commands you can run
+	- 'exit' to stop janet (she will still love you though)
 
 
 oh, did we mention janet can autocomplete commands??
