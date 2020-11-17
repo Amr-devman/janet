@@ -1,7 +1,7 @@
 # Janet
 
 Janet is a powerful python project manager that allows python developers
-to focus more on scripting and less on piping packages. janet will auto-install
+to focus more on scripting and less on piping packages and managing a project. janet will auto-install
 pip packages when a .py file is saved and will generate a requirements.txt file
 automatically, it will also monitor all your scripts for new packages and install them in the background. 
 
@@ -22,3 +22,16 @@ this is useful if your project is a webserver. You can change the script that is
 you will then be greeted with a menu of commands, that's it!
 
 ![Janet CLI](readme_assets/images/janet_cli.png)
+
+you can now start working on your project, create new files, delete files, do whatever it is you want, janet will silently track your project and download dependecies silently once a file is saved.
+
+![Janet in action](readme_assets/gifs/janet_in_action.gif)
+
+
+## I am seeing this weird ```janetrecord.json```, WTH is that ?
+
+When you initialize janet in your projet directory, it creates a ```janetrecord.json``` file that stores the last time a file is modified, when a file is saved the last modified date will also change and notify janet to check for new packages. a janetrecord is meant to be a simple record janet could refer to when initialized, if it is not present then janet will create a new record automatically
+
+![Janet record](readme_assets/images/janet_record.png)
+
+Oh, and it will add it to your .gitignore automatically, janet's got you!
