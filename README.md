@@ -43,7 +43,7 @@ we recommand that you create your projects in a virtualenv and install janet on 
 ## What can janet do?
 janet has the following commands:
 
-	- 'run' to run the script you defined using the ```-s``` flag
+	- 'run' to run the script you defined using the -s flag
 	- 'install <PACKAGE_1> <PACKAGE_2>' to manually install packages (yuck)
 	- 'change-entrypoint' to change the script 'run' will run
 	- 'kill' to kill run if things go run
@@ -59,7 +59,7 @@ oh, did we mention janet can autocomplete commands??
 
 ## I am seeing this weird ```janetrecord.json```, WTH is that ?
 
-When you initialize janet in your projet directory, it creates a ```janetrecord.json``` file that stores the last time a file was modified, when a file is saved the last modified date will also change which will notify janet to check for new packages in the saved file. a janetrecord is meant to be a simple record janet could refer to when initialized, if it is not present then janet will create a new record automatically.
+When you initialize janet in your project directory, it creates a ```janetrecord.json``` file that stores the last time a file was modified, when a file is saved the last modified date will also change which will notify janet to check for new packages in the saved file. a janetrecord is meant to be a simple record janet could refer to when initialized, if it is not present then janet will create a new record automatically.
 
 ![Janet record](readme_assets/images/janet_record.png)
 
