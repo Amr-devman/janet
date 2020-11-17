@@ -1,6 +1,7 @@
 import os
 import importlib
 import subprocess
+from subprocess import Popen, PIPE
 import sys
 import time
 
@@ -26,11 +27,14 @@ def list_files(startpath):
 
 def install(modules):
 	cmd = [sys.executable, "-m", "pip", "install"]
-	spit_requirements_txt = [sys.executable, "-m", "pip", "freeze", ">", "requirements.txt"]
+	spit_requirements_txt = [sys.executable, "-m", "pip", "freeze"]
+	requirements_file = open("requirements.txt", "w")
 	cmd.extend(modules)
-	cmd.extend("&&")
-	cmd.extend(spit_requirements_txt)
-	subprocess.check_call(cmd)
+	
+	process_1 = subprocess.run(cmd, universal_newlines=True, stdout=subprocess.PIPE)
+	process_2 = subprocess.run(spit_requirements_txt, universal_newlines=True, input=process_1.stdout, stdout=requirements_file)
+
+
 
 def check_module_in_pip(module):
 	cmd = [sys.executable, '-m', 'pip', 'search', module]
