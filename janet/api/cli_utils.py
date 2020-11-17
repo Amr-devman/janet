@@ -12,11 +12,12 @@ import signal
 def print_header():
     print(Fore.WHITE + 'Starting Janet...')
     print(Fore.GREEN + 'Janet is running, use the command line to issue commands like:')
-    print(Fore.RED+ '	1. run-code (to run code from the selected entry point')
+    print(Fore.RED+ '	1. run (to run the selected entry point (running again will kill the current python process)')
     print(Fore.RED+ '	1. install <PACKAGE_1> <PACKAGE_2> ... (install packages manually)')
     print(Fore.RED+ '	2. change-entrypoint (change the entry point')
-    print(Fore.RED+ '	3. kill (to end a run)')
+    print(Fore.RED+ '	3. kill (to manually end a run)')
     print(Fore.RED+ '	4. exit (to stop janet)')
+    print(Fore.RED+ '	5. menu')
     print(Fore.WHITE)
 
 
@@ -42,11 +43,12 @@ def command(command, process, entry_point, project_path):
 		return process, entry_point
 
 
-	elif command_no_spaces.lower() == 'run-code':
+	elif command_no_spaces.lower() == 'run':
 		if process is not None:
 			print("you have to kill the current process before starting a new one")
-		else:
-			process = run_code(project_path, entry_point, debug=False)
+			process.send_signal(signal.SIGINT)
+
+		process = run_code(project_path, entry_point, debug=False)
 		return process, entry_point
 
 	elif command_no_spaces.lower() == 'change-entrypoint':
@@ -65,6 +67,10 @@ def command(command, process, entry_point, project_path):
 			print("Nothing to kill")
 
 		return None, entry_point
+
+	elif command_no_spaces.lower() == 'menu':
+		print_header()
+		return process, entry_point
 
 	else:
 		return process, entry_point

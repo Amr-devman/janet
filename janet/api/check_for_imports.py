@@ -26,7 +26,10 @@ def list_files(startpath):
 
 def install(modules):
 	cmd = [sys.executable, "-m", "pip", "install"]
+	spit_requirements_txt = [sys.executable, "-m", "pip", "freeze", ">", "requirements.txt"]
 	cmd.extend(modules)
+	cmd.extend("&&")
+	cmd.extend(spit_requirements_txt)
 	subprocess.check_call(cmd)
 
 def check_module_in_pip(module):
