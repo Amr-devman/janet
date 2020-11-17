@@ -7,11 +7,12 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="janet", # Replace with your own username
-    version="0.1.1",
+    version="0.1.2",
     author="Amr Ahmed",
     author_email="amrahmed.business@gmail.com",
-    description="Janet is a powerful python project development environement",
+    description="Janet: manage your python projects more efficiently",
     long_description_content_type="text/markdown",
+    long_description=long_description,
     url="https://github.com/veryprofessionalusername/janet",
     packages=setuptools.find_packages(),
     classifiers=[
