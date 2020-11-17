@@ -5,6 +5,10 @@ to focus more on scripting and less on piping packages and managing a project. j
 pip packages when a .py file is saved and will generate a requirements.txt file
 automatically, it will also monitor all your scripts for new packages and install them in the background. 
 
+janet currently supports ```python 3``
+
+## How do I use it?
+
 To get started with janet, you need to install the package:
 
 ```bash
