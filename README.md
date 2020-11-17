@@ -37,7 +37,8 @@ we recommand that you create your projects in a virtualenv and install janet on 
 
 
 ## What can janet do?
-janet has the following commands
+janet has the following commands:
+
 	- 'run' to run the script you defined using the ```-s``` flag
 	- 'install <PACKAGE_1> <PACKAGE_2>' to manually install packages (yuck)
 	- 'change-entrypoint' to change the script 'run' will run
