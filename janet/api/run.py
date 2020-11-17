@@ -9,9 +9,9 @@ def call_run_subprocess(file, args=None):
 	cmd = [sys.executable, file]
 	if args is not None:
 		cmd.extend(args)
-	p = subprocess.Popen(cmd)
+	process = subprocess.Popen(cmd)
 
-	return p
+	return process
 
 
 

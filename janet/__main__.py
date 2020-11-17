@@ -1,7 +1,7 @@
 from .api.check_for_imports import check
 from .api.cli_utils import print_header, command
-
 from .api.janet_record import JanetRecord
+from .api.autocompleter import SimpleCompleter
 
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.events import EVENT_JOB_ERROR, EVENT_JOB_EXECUTED
@@ -13,6 +13,8 @@ import os
 import time
 import logging
 import signal
+import readline
+
 
 logging.getLogger('apscheduler.scheduler').setLevel('ERROR')
 logging.getLogger('apscheduler.executors.default').propagate = False
@@ -45,8 +47,19 @@ janetrecord = JanetRecord(project_path)
 scheduler = BackgroundScheduler()
 scheduler.add_job(func=check , args=[project_path, janetrecord], trigger="interval", seconds=2)
 scheduler.add_job(func=janetrecord.save_janetrecord, trigger="interval", seconds=60)
-## kill the scheduled process when janet shutsdown
+## kill the scheduled process when janet shuts down
 atexit.register(lambda: scheduler.shutdown())
+
+
+# Register our completer function
+readline.set_completer(SimpleCompleter(['exit',
+										'install',
+										'run',
+										'change-entrypoint',
+										'kill',
+										'menu']).complete)
+# Use the tab key for completion
+readline.parse_and_bind('tab: complete')
 
 
 if __name__ == "__main__":
