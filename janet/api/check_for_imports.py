@@ -42,6 +42,29 @@ def check_module_in_pip(module):
 	return len(result.stdout) > 0
 
 
+def resolve_imports(lines):
+	modules_to_resolve = []
+
+	for line in lines:
+		if( ("import" in line) and
+			 (not line.startswith('#')) and 
+			 	(not line.endswith("import")) ):
+			line_formated = line.replace("import","")
+			line_split= line_formated.split(",")
+
+			for imported_module in line_split:
+				as_keyword_index = imported_module.find(" as ")
+				if as_keyword_index != -1:
+					imported_module = imported_module[0:as_keyword_index]
+					
+				imported_module = imported_module.replace(" ","")
+				imported_module = imported_module.split(".")[0]
+				imported_module = imported_module.rstrip("\n")
+				modules_to_resolve.append(imported_module)
+
+	return modules_to_resolve
+
+
 
 def check(project_dir, janetrecord):
 	files = list_files(project_dir)
@@ -57,22 +80,16 @@ def check(project_dir, janetrecord):
 
 			if last_modified > janetrecord.get_last_modified_from_records(file):
 				janetrecord.store_last_modified(file)
-
 				code = open(file, "r")
 				lines = code.readlines()
-				for line in lines:
-					if( ("import" in line) and
-						 (not line.startswith('#')) and 
-						 	(not line.endswith("import")) ):
-						module = line.split(" ")[1]
-						module = module.split(".")[0]
-						module = module.rstrip("\n")
-						modules.append(module)
+				
+				modules_to_resolve = resolve_imports(lines)
+
+				if len(modules_to_resolve):
+					modules.extend(modules_to_resolve)
 
 
 	uninstalled_modules = []
-
-	
 
 	for module in modules:
 		
@@ -105,5 +122,6 @@ def check(project_dir, janetrecord):
 		print()
 		print("Installation completed")
 		print("press enter to show cli..")
+
 
 
