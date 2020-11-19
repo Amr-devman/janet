@@ -71,7 +71,7 @@ Oh, and it will add it to your .gitignore automatically, janet's got you!
 not reaaaaaalllly, janet is still work in progress and more features will be added soon, I welcome any contributions to this repo!
 
 Janet still has some issues resolving some packages were the name of the imported module does not match the package name, it also
-Struggles with unconventional methods of import such as:
+struggles with unconventional methods of import such as:
 
 ```python
 import numpy, pandas, scipy
