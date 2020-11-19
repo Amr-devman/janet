@@ -58,10 +58,9 @@ def resolve_imports(lines):
 	modules_to_resolve = []
 
 	for line in lines:
-		if( ("import" in line) and
-			 (not line.startswith('#')) and 
+		if( (line.startswith("import")) and
 			 	(not line.endswith("import")) ):
-			line_formated = line.replace("import","")
+			line_formated = line.replace("import ","")
 			line_split= line_formated.split(",")
 
 			for imported_module in line_split:
@@ -73,6 +72,16 @@ def resolve_imports(lines):
 				imported_module = imported_module.split(".")[0]
 				imported_module = imported_module.rstrip("\n")
 				modules_to_resolve.append(imported_module)
+		
+		elif line.startswith("from") and (not line.endswith("from")):
+			line_formated = line.replace("from ","")
+			line_split= line_formated.split("import")[0]
+
+			imported_module = line_split.replace(" ","")
+			imported_module = imported_module.split(".")[0]
+			imported_module = imported_module.rstrip("\n")
+			modules_to_resolve.append(imported_module)
+
 
 	return modules_to_resolve
 
@@ -120,6 +129,7 @@ def check(project_dir, janetrecord):
 			else:
 				uninstalled_modules.append(module)
 			
+
 
 	
 
