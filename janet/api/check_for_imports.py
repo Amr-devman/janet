@@ -25,15 +25,30 @@ def list_files(startpath):
 
 	return file_list
 
+def update_requirements(janetrecord):
+	spit_packages = [sys.executable, "-m", "pip", "freeze"]
+	pip_freeze = subprocess.run(spit_packages, universal_newlines=True, stdout=subprocess.PIPE)
+
+	frozen_packages = pip_freeze.stdout
+	with open("_temp_janet_file.txt", "w") as temp_file:
+		temp_file.write(frozen_packages)
+
+	with open("requirements.txt", "w") as requirements_file:
+		for line in open("_temp_janet_file.txt"):
+			line_splitted = line.split("==")[0].lower()
+			if line_splitted not in janetrecord.janet_requirements:
+				requirements_file.writelines(line)
+
+	os.remove("_temp_janet_file.txt")
+
+
+
 def install(modules):
 	cmd = [sys.executable, "-m", "pip", "install"]
-	spit_requirements_txt = [sys.executable, "-m", "pip", "freeze"]
-	requirements_file = open("requirements.txt", "w")
 	cmd.extend(modules)
 	
-	process_1 = subprocess.run(cmd, universal_newlines=True, stdout=subprocess.PIPE)
-	process_2 = subprocess.run(spit_requirements_txt, universal_newlines=True, input=process_1.stdout, stdout=requirements_file)
-
+	pip_install = subprocess.run(cmd, universal_newlines=True, stdout=subprocess.PIPE)
+	
 
 
 def check_module_in_pip(module):
@@ -122,6 +137,8 @@ def check(project_dir, janetrecord):
 		print()
 		print("Installation completed")
 		print("press enter to show cli..")
+
+	update_requirements(janetrecord)
 
 
 

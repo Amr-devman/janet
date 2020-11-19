@@ -1,6 +1,9 @@
 import json
 import os
 from datetime import datetime
+import subprocess
+import sys
+
 
 class JanetRecord:
 	def __init__(self, project_dir):
@@ -15,6 +18,23 @@ class JanetRecord:
 			self.save_janetrecord()
 		
 		self.add_to_gitignore()
+
+		self.janet_requirements = self.query_janet_requirements()
+
+	def query_janet_requirements(self):
+		janet_requirements = [sys.executable, "-m", "pip", "show", "janet"]
+		janet_freeze = subprocess.run(janet_requirements, universal_newlines=True, stdout=subprocess.PIPE)
+	
+		janet_freeze_stdout_str = janet_freeze.stdout
+		Requires_index = janet_freeze_stdout_str.find("Requires: ")
+		janet_requirements = janet_freeze_stdout_str[Requires_index:]
+		janet_requirements = janet_requirements[:janet_requirements.find("\n")]
+		janet_requirements = janet_requirements.replace("Requires: ","")
+		janet_requirements = janet_requirements.replace(" ","")
+		janet_requirements = janet_requirements.split(",")
+		janet_requirements.append("janet")
+
+		return janet_requirements
 
 
 	def check_for_existing_records(self):
