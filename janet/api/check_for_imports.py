@@ -16,9 +16,6 @@ def list_files(startpath):
 				continue
 			elif env_name in root:
 				continue
-  			#REMOVE LATER
-			if "api" in root:
-				continue
 		for f in files:
 			if f.endswith(".py") :
 				file_list.append(f"{root}/{f}")
