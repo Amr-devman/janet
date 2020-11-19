@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="janet", # Replace with your own username
-    version="0.1.3",
+    version="0.1.4",
     author="Amr Ahmed",
     author_email="amrahmed.business@gmail.com",
     description="Janet: manage your python projects more efficiently",

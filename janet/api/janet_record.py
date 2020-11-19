@@ -15,9 +15,9 @@ class JanetRecord:
 			self.janetrecord = self.load_janetrecord()
 		else:
 			self.janetrecord = self.create_janetrecord()
-			self.save_janetrecord()
 		
 		self.add_to_gitignore()
+		self.save_janetrecord()
 
 		self.janet_requirements = self.query_janet_requirements()
 
@@ -48,6 +48,7 @@ class JanetRecord:
 		janetrecord = 	{
 							"_project_dir": self.project_dir,
 							"_creation_time": curr_time,
+							"_is_in_gitignore": False,
 							"records": {}
 						}
 		return janetrecord
@@ -68,13 +69,15 @@ class JanetRecord:
 	def add_to_gitignore(self):
 		project_files = os.listdir(self.project_dir)
 
-		if ".gitignore" in project_files:
-			gitignore_path = os.path.join(self.project_dir, ".gitignore")
-			with open(gitignore_path, "a") as gitignore:
-				gitignore.write("\n#janet records\n.janetrecord.json")
-		else:
-			print("Did not find a gitignore")
-			print("use git init and run janet again or add it to .gitignore manually!")
+		if not self.janetrecord["_is_in_gitignore"]:
+			if ".gitignore" in project_files:
+				gitignore_path = os.path.join(self.project_dir, ".gitignore")
+				with open(gitignore_path, "a") as gitignore:
+					gitignore.write("\n#janet records\n.janetrecord.json")
+				self.janetrecord["_is_in_gitignore"] = True
+			else:
+				print("Did not find a gitignore")
+				print("use git init and run janet again or add it to .gitignore manually!")
 
 
 	def get_last_modified_time(self, filepath):
