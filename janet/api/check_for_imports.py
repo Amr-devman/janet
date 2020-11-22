@@ -1,9 +1,7 @@
 import os
 import importlib
 import subprocess
-from subprocess import Popen, PIPE
 import sys
-import time
 
 
 def list_files(startpath):
@@ -18,7 +16,8 @@ def list_files(startpath):
 				continue
 		for f in files:
 			if f.endswith(".py") :
-				file_list.append(f"{root}/{f}")
+				path_to_append = "{}/{}".format(root,f)
+				file_list.append(path_to_append)
 
 	return file_list
 
@@ -44,7 +43,7 @@ def install(modules):
 	cmd = [sys.executable, "-m", "pip", "install"]
 	cmd.extend(modules)
 	
-	pip_install = subprocess.run(cmd, universal_newlines=True, stdout=subprocess.PIPE)
+	subprocess.run(cmd, universal_newlines=True, stdout=subprocess.PIPE)
 	
 
 
@@ -119,12 +118,12 @@ def check(project_dir, janetrecord):
 		elif module in os.listdir(project_dir):
 				continue
 
-
 		found = importlib.find_loader(module)
 		if not found:
 			is_in_pip = check_module_in_pip(module)
 			if not is_in_pip:
-				print(f"{module} is neither a local import nor a pip package, skipping ...")
+				error_msg = "{} is neither a local import nor a pip package, skipping ...".format(module)
+				print(error_msg)
 				continue
 			else:
 				uninstalled_modules.append(module)
@@ -136,7 +135,8 @@ def check(project_dir, janetrecord):
 	if len(uninstalled_modules):
 		print('You have the following uninstalled module(s)')
 		for idx, mod in enumerate(uninstalled_modules):
-			print(f"	{idx}: {mod}")
+			module_msg = "	{}: {}".format(idx, mod)
+			print()
 		print("I'll take care of it!")
 		print()
  

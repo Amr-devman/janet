@@ -2,10 +2,6 @@ from .run import run_code
 from .check_for_imports import install
 
 from colorama import Fore
-import argparse
-import os
-import time
-import logging
 import signal
 
 from pyfiglet import Figlet

@@ -4,15 +4,12 @@ from .api.janet_record import JanetRecord
 from .api.autocompleter import SimpleCompleter
 
 from apscheduler.schedulers.background import BackgroundScheduler
-from apscheduler.events import EVENT_JOB_ERROR, EVENT_JOB_EXECUTED
 import atexit
 
 from colorama import Fore
 import argparse
 import os
-import time
 import logging
-import signal
 import readline
 
 

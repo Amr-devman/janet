@@ -22,11 +22,11 @@ def run_code(project_dir, entry_point, debug=False):
 
 	if len(entry_point_splitted) > 1:
 		if entry_point_splitted[1] == "py":
-			entry_point = f"{entry_point}"
+			entry_point = "{}".format(entry_point)
 		else:
-			entry_point = f"{entry_point_splitted[0]}.py"
+			entry_point = "{}.py".format(entry_point_splitted[0])
 	else:
-		entry_point = f"{entry_point_splitted[0]}.py"
+		entry_point = "{}.py".format(entry_point_splitted[0])
 
 
 	for file in files:
