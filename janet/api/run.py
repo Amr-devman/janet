@@ -1,6 +1,5 @@
 from .check_for_imports import list_files
 import subprocess
-import psutil
 import sys
 import os
 
