@@ -57,9 +57,9 @@ oh, did we mention janet can autocomplete commands??
 
 
 
-## I am seeing this weird ```janetrecord.json```, WTH is that ?
+## I am seeing this weird ```jrecord.json```, WTH is that ?
 
-When you initialize janet in your project directory, it creates a ```janetrecord.json``` file that stores the last time a file was modified, when a file is saved the last modified date will also change which will notify janet to check for new packages in the saved file. a janetrecord is meant to be a simple record janet could refer to when initialized, if it is not present then janet will create a new record automatically.
+When you initialize janet in your project directory, it creates a ```jrecord.json``` file that stores the last time a file was modified, when a file is saved the last modified date will also change which will notify janet to check for new packages in the saved file. a janetrecord is meant to be a simple record janet could refer to when initialized, if it is not present then janet will create a new record automatically.
 
 ![Janet record](readme_assets/images/janet_record.png)
 
