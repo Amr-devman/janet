@@ -40,7 +40,7 @@ class JanetRecord:
 	def check_for_existing_records(self):
 		project_files = os.listdir(self.project_dir)
 
-		return ".janetrecord.json" in project_files
+		return ".jrecord.json" in project_files
 
 	def create_janetrecord(self):
 		curr_time = datetime.now()
@@ -54,13 +54,13 @@ class JanetRecord:
 
 
 	def save_janetrecord(self):
-		janetrecord_filepath = os.path.join(self.project_dir, ".janetrecord.json")
+		janetrecord_filepath = os.path.join(self.project_dir, ".jrecord.json")
 		with open(janetrecord_filepath, 'w') as f:
 			json.dump(self.janetrecord, f, indent=4, sort_keys=True)
 
 
 	def load_janetrecord(self):
-		janetrecord_filepath = os.path.join(self.project_dir, ".janetrecord.json")
+		janetrecord_filepath = os.path.join(self.project_dir, ".jrecord.json")
 		with open(janetrecord_filepath) as f:
 			janetrecord = json.load(f)
 		return janetrecord
@@ -69,9 +69,9 @@ class JanetRecord:
 		project_files = os.listdir(self.project_dir)
 		if ".gitignore" in project_files:
 			gitignore_path = os.path.join(self.project_dir, ".gitignore")
-			if "janetrecord.json" not in open(gitignore_path).read():
+			if "jrecord.json" not in open(gitignore_path).read():
 				with open(gitignore_path, "a") as gitignore:
-					gitignore.write("\n#janet records\n.janetrecord.json")
+					gitignore.write("\n#janet records\n.jrecord.json")
 		else:
 			print("Did not find a gitignore")
 			print("use git init and run janet again or add it to .gitignore manually!")
