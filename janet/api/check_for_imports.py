@@ -3,6 +3,7 @@ import importlib
 import subprocess
 import sys
 
+from .pip_index import search
 
 def list_files(startpath):
 	file_list = []
@@ -45,13 +46,6 @@ def install(modules):
 	
 	subprocess.run(cmd, universal_newlines=True, stdout=subprocess.PIPE)
 	
-
-
-def check_module_in_pip(module):
-	cmd = [sys.executable, '-m', 'pip', 'search', module]
-	result = subprocess.run(cmd, capture_output=True)
-	return len(result.stdout) > 0
-
 
 def resolve_imports(lines):
 	modules_to_resolve = []
@@ -120,7 +114,7 @@ def check(project_dir, janetrecord):
 
 		found = importlib.find_loader(module)
 		if not found:
-			is_in_pip = check_module_in_pip(module)
+			is_in_pip = search(module)
 			if not is_in_pip:
 				error_msg = "{} is neither a local import nor a pip package, skipping ...".format(module)
 				print(error_msg)

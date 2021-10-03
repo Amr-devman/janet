@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="janet", # Replace with your own username
-    version="0.1.7",
+    version="0.2.0",
     author="Amr Ahmed",
     author_email="amrahmed.business@gmail.com",
     description="Janet: manage your python projects more efficiently",
@@ -21,7 +21,8 @@ setuptools.setup(
     install_requires=[
           'colorama',
           'apscheduler',
-          'pyfiglet'
+          'pyfiglet',
+          'bs4'
       ],
     python_requires='>=3.6',
 )

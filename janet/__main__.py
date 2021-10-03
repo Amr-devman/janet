@@ -2,6 +2,7 @@ from .api.check_for_imports import check
 from .api.cli_utils import print_header, command
 from .api.janet_record import JanetRecord
 from .api.autocompleter import SimpleCompleter
+from .api.pip_index import populate
 
 from apscheduler.schedulers.background import BackgroundScheduler
 import atexit
@@ -44,6 +45,7 @@ janetrecord = JanetRecord(project_path)
 scheduler = BackgroundScheduler()
 scheduler.add_job(func=check , args=[project_path, janetrecord], trigger="interval", seconds=2)
 scheduler.add_job(func=janetrecord.save_janetrecord, trigger="interval", seconds=60)
+scheduler.add_job(func=populate, trigger="interval", hours=6)
 ## kill the scheduled process when janet shuts down
 atexit.register(lambda: scheduler.shutdown())
 
